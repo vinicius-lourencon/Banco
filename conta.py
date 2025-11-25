@@ -24,3 +24,29 @@ class Conta(ABC):
         self._cliente: Cliente = cliente
         self._saldo: float = float(saldo_inicial)
         self._historico: List[str] = []
+        
+
+    @property
+    def numero(self) -> str:
+        """
+        Retorna o número identificador da conta.
+
+        :return: Número da conta.
+        """
+        return self._numero
+
+    @property
+    def cliente(self) -> Cliente:
+        """
+        Retorna o cliente associado à conta.
+
+        """
+        return self._cliente
+
+    @property
+    def saldo(self) -> float:
+        """
+        Retorna o saldo atual da conta.
+
+        """
+        return self._saldo
