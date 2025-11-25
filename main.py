@@ -38,3 +38,32 @@ def menu() -> None:
         print("7 - Extrato")
         print("8 - Listar contas")
         print("0 - Sair")
+
+        opcao: str = input("Escolha uma opção: ").strip()
+
+        if opcao == "0":
+            print("Saindo... Obrigado por usar o Banco do Vinícius!")
+            break
+
+        try:
+            if opcao == "1":
+                nome: str = input("Nome do cliente: ")
+                cpf: str = input("CPF: ")
+                telefone: str = input("Telefone: ")
+                banco.cadastrar_cliente(nome, cpf, telefone)
+                print("Cliente cadastrado com sucesso.")
+
+            elif opcao == "2":
+                numero: str = input("Número da conta: ")
+                cpf: str = input("CPF do cliente: ")
+                saldo_inicial: float = ler_float("Saldo inicial: R$ ")
+                limite: float = ler_float("Limite da conta corrente: R$ ")
+                banco.abrir_conta_corrente(numero, cpf, saldo_inicial, limite)
+                print("Conta corrente aberto com sucesso.")
+
+            elif opcao == "3":
+                numero: str = input("Número da conta: ")
+                cpf: str = input("CPF do cliente: ")
+                saldo_inicial: float = ler_float("Saldo inicial: R$ ")
+                banco.abrir_conta_poupanca(numero, cpf, saldo_inicial)
+                print("Conta poupança aberta com sucesso.")
