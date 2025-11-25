@@ -16,3 +16,34 @@ class Cliente:
         self._nome: str = nome
         self._cpf: str = cpf
         self._telefone: str = telefone
+
+
+    @property
+    def nome(self) -> str:
+        """
+        Retorna o nome do cliente.
+        """
+        return self._nome
+
+    @property
+    def cpf(self) -> str:
+        """
+        Retorna o CPF do cliente.
+
+        """
+        return self._cpf
+
+    @property
+    def telefone(self) -> str:
+        """
+        Retorna o telefone do cliente.
+        """
+        return self._telefone
+
+    def __str__(self) -> str:
+        """
+        Retorna a representação em texto do cliente.
+
+        :return: String formatada com nome e CPF do cliente.
+        """
+        return f"{self._nome} (CPF: {self._cpf})"
