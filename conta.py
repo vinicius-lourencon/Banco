@@ -103,3 +103,24 @@ class Conta(ABC):
         else:
             linhas.extend(self._historico)
         return "\n".join(linhas)
+    
+    
+    @abstractmethod
+    def tipo_conta(self) -> str:
+        """
+        Retorna o tipo da conta (por exemplo, 'Conta Corrente', 'Conta Poupança').
+
+        Este método deve ser implementado pelas subclasses.
+
+        """
+        raise NotImplementedError
+
+    def __str__(self) -> str:
+        """
+        Retorna a representação em texto resumida da conta.
+
+        """
+        return (
+            f"{self.tipo_conta()} {self._numero} - "
+            f"{self._cliente.nome} - Saldo: R$ {self._saldo:.2f}"
+        )
