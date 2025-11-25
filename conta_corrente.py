@@ -27,3 +27,11 @@ class ContaCorrente(Conta):
         super().__init__(numero, cliente, saldo_inicial)
         self._limite: float = float(limite)
 
+
+    @property
+    def limite(self) -> float:
+        """
+        Retorna o limite da conta corrente.
+
+        """
+        return self._limite
