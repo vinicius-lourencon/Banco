@@ -141,8 +141,8 @@ class Banco:
         O método captura exceções específicas de negócio (como saldo insuficiente)
         e também erros de tipo/valor.
 
-        :param numero_conta: Número da conta de onde será feito o saque.
-        :param valor: Valor a ser sacado.
+        :numero_conta: Número da conta de onde será feito o saque.
+        :valor: Valor a ser sacado.
         """
         try:
             conta: Conta = self._obter_conta(numero_conta)
@@ -150,3 +150,46 @@ class Banco:
             print(f"Saque realizado com sucesso. Novo saldo: R$ {conta.saldo:.2f}")
         except (ErroBanco, ValueError, TypeError) as e:
             print(f"[ERRO AO SACAR] {e}")
+
+
+    def transferir(self, numero_origem: str, numero_destino: str, valor: float) -> None:
+        """
+        Realiza uma transferência entre duas contas.
+
+        :umero_origem: Número da conta de origem.
+        :numero_destino: Número da conta de destino.
+        :valor: Valor a ser transferido.
+        """
+        try:
+            conta_origem: Conta = self._obter_conta(numero_origem)
+            conta_destino: Conta = self._obter_conta(numero_destino)
+
+            conta_origem.sacar(valor)
+            conta_destino.depositar(valor)
+            print("Transferência realizada com sucesso.")
+        except (ErroBanco, ValueError, TypeError) as e:
+            print(f"[ERRO NA TRANSFERÊNCIA] {e}")
+
+    def mostrar_extrato(self, numero_conta: str) -> None:
+        """
+        Exibe o extrato de uma conta no terminal.
+
+        :numero_conta: Número da conta cujo extrato será exibido.
+        """
+        try:
+            conta: Conta = self._obter_conta(numero_conta)
+            print(conta.extrato())
+        except ErroBanco as e:
+            print(f"[ERRO AO GERAR EXTRATO] {e}")
+
+    def listar_contas(self) -> None:
+        """
+        Lista todas as contas cadastradas no banco.
+
+        As informações são exibidas diretamente no terminal.
+        """
+        if not self._contas:
+            print("Nenhuma conta cadastrada.")
+            return
+        for conta in self._contas.values():
+            print(conta)
