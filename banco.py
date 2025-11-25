@@ -87,3 +87,30 @@ class Banco:
         conta = ContaPoupanca(numero, cliente, saldo_inicial)
         self._contas[numero] = conta
         return conta
+
+
+    def _obter_cliente_por_cpf(self, cpf: str) -> Cliente:
+        """
+        Busca um cliente pelo CPF.
+
+        :cpf: CPF do cliente.
+        :return: Instância de Cliente encontrada.
+        :raises ErroBanco: Se o cliente não for encontrado.
+        """
+        cliente = self._clientes.get(cpf)
+        if not cliente:
+            raise ErroBanco(f"Cliente com CPF {cpf} não encontrado.")
+        return cliente
+
+    def _obter_conta(self, numero: str) -> Conta:
+        """
+        Busca uma conta pelo número.
+
+        :numero: Número da conta.
+        :return: Instância de Conta encontrada.
+        :raises ContaNaoEncontradaError: Se a conta não for localizada.
+        """
+        conta = self._contas.get(numero)
+        if not conta:
+            raise ContaNaoEncontradaError(numero)
+        return conta
