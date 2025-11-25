@@ -133,3 +133,20 @@ class Banco:
             print(f"Depósito realizado com sucesso. Novo saldo: R$ {conta.saldo:.2f}")
         except (ErroBanco, ValueError, TypeError) as e:
             print(f"[ERRO AO DEPOSITAR] {e}")
+
+    def sacar(self, numero_conta: str, valor: float) -> None:
+        """
+        Realiza um saque em uma conta específica.
+
+        O método captura exceções específicas de negócio (como saldo insuficiente)
+        e também erros de tipo/valor.
+
+        :param numero_conta: Número da conta de onde será feito o saque.
+        :param valor: Valor a ser sacado.
+        """
+        try:
+            conta: Conta = self._obter_conta(numero_conta)
+            conta.sacar(valor)
+            print(f"Saque realizado com sucesso. Novo saldo: R$ {conta.saldo:.2f}")
+        except (ErroBanco, ValueError, TypeError) as e:
+            print(f"[ERRO AO SACAR] {e}")
