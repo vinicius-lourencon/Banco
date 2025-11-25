@@ -85,3 +85,21 @@ class Conta(ABC):
             raise SaldoInsuficienteError(self._saldo, valor)
         self._saldo -= valor
         self._registrar(f"Saque de R$ {valor:.2f}")
+        
+    def extrato(self) -> str:
+        """
+        Gera uma string com o extrato da conta.
+
+        Inclui saldo atual e histórico de movimentações.
+
+        """
+        linhas: List[str] = [
+            f"Extrato da conta {self._numero} - {self._cliente.nome}",
+            f"Saldo atual: R$ {self._saldo:.2f}",
+            "-" * 30,
+        ]
+        if not self._historico:
+            linhas.append("Nenhuma movimentação até o momento.")
+        else:
+            linhas.extend(self._historico)
+        return "\n".join(linhas)
