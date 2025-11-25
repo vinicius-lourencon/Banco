@@ -66,3 +66,24 @@ class Banco:
         conta = ContaCorrente(numero, cliente, saldo_inicial, limite)
         self._contas[numero] = conta
         return conta
+    
+
+    def abrir_conta_poupanca(
+        self,
+        numero: str,
+        cpf_cliente: str,
+        saldo_inicial: float = 0.0,
+    ) -> ContaPoupanca:
+        """
+        Abre uma nova conta poupança para um cliente existente.
+
+        :numero: Número da conta.
+        :cpf_cliente: CPF do cliente já cadastrado.
+        :saldo_inicial: Saldo inicial da conta.
+        :return: Instância de ContaPoupanca criada.
+        :raises ErroBanco: Se o cliente não for encontrado.
+        """
+        cliente: Cliente = self._obter_cliente_por_cpf(cpf_cliente)
+        conta = ContaPoupanca(numero, cliente, saldo_inicial)
+        self._contas[numero] = conta
+        return conta
