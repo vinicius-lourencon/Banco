@@ -50,3 +50,38 @@ class Conta(ABC):
 
         """
         return self._saldo
+
+    def _registrar(self, mensagem: str) -> None:
+        """
+        Registra uma mensagem no histórico da conta.
+
+        :mensagem: Texto descrevendo a movimentação realizada.
+        """
+        self._historico.append(mensagem)
+
+    def depositar(self, valor: float) -> None:
+        """
+        Realiza um depósito na conta, caso o valor seja válido.
+
+        :valor: Valor a ser depositado (deve ser maior que zero).
+        :raises ValorInvalidoError: Se o valor for menor ou igual a zero.
+        """
+        if valor <= 0:
+            raise ValorInvalidoError(valor)
+        self._saldo += valor
+        self._registrar(f"Depósito de R$ {valor:.2f}")
+
+    def sacar(self, valor: float) -> None:
+        """
+        Realiza um saque na conta, caso haja saldo suficiente.
+
+        :valor: Valor a ser sacado (deve ser maior que zero).
+        :raises ValorInvalidoError: Se o valor for menor ou igual a zero.
+        :raises SaldoInsuficienteError: Se o saldo for insuficiente.
+        """
+        if valor <= 0:
+            raise ValorInvalidoError(valor)
+        if valor > self._saldo:
+            raise SaldoInsuficienteError(self._saldo, valor)
+        self._saldo -= valor
+        self._registrar(f"Saque de R$ {valor:.2f}")
