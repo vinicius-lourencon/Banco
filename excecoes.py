@@ -23,8 +23,8 @@ class SaldoInsuficienteError(ErroBanco):
         """
         Cria uma exceção com detalhes do saldo e valor da tentativa.
 
-        :param saldo_atual: Valor disponível (saldo ou saldo + limite).
-        :param valor: Valor que se tentou sacar/debitar.
+        :saldo_atual: Valor disponível (saldo ou saldo + limite).
+        :valor: Valor que se tentou sacar/debitar.
         """
         mensagem = (
             f"Saldo insuficiente. Saldo disponível: {saldo_atual:.2f}, "
