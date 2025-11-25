@@ -67,3 +67,37 @@ def menu() -> None:
                 saldo_inicial: float = ler_float("Saldo inicial: R$ ")
                 banco.abrir_conta_poupanca(numero, cpf, saldo_inicial)
                 print("Conta poupança aberta com sucesso.")
+
+            elif opcao == "4":
+                numero: str = input("Número da conta para depósito: ")
+                valor: float = ler_float("Valor do depósito: R$ ")
+                banco.depositar(numero, valor)
+
+            elif opcao == "5":
+                numero: str = input("Número da conta para saque: ")
+                valor: float = ler_float("Valor do saque: R$ ")
+                banco.sacar(numero, valor)
+
+            elif opcao == "6":
+                origem: str = input("Conta de origem: ")
+                destino: str = input("Conta de destino: ")
+                valor: float = ler_float("Valor da transferência: R$ ")
+                banco.transferir(origem, destino, valor)
+
+            elif opcao == "7":
+                numero: str = input("Número da conta: ")
+                banco.mostrar_extrato(numero)
+
+            elif opcao == "8":
+                banco.listar_contas()
+
+            else:
+                print("Opção inválida. Tente novamente.")
+
+        except Exception as e:
+            # Captura qualquer erro inesperado que não foi tratado
+            print(f"[ERRO INESPERADO] {e}")
+
+
+if __name__ == "__main__":
+    menu()
