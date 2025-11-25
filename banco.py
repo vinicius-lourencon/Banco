@@ -114,3 +114,22 @@ class Banco:
         if not conta:
             raise ContaNaoEncontradaError(numero)
         return conta
+    
+    # ---------- OPERAÇÕES -----------------
+    
+    def depositar(self, numero_conta: str, valor: float) -> None:
+        """
+        Realiza um depósito em uma conta específica.
+
+        Esta função trata internamente as exceções e exibe mensagens
+        de erro amigáveis para o usuário.
+
+        :numero_conta: Número da conta que receberá o depósito.
+        :valor: Valor a ser depositado.
+        """
+        try:
+            conta: Conta = self._obter_conta(numero_conta)
+            conta.depositar(valor)
+            print(f"Depósito realizado com sucesso. Novo saldo: R$ {conta.saldo:.2f}")
+        except (ErroBanco, ValueError, TypeError) as e:
+            print(f"[ERRO AO DEPOSITAR] {e}")
