@@ -35,3 +35,29 @@ class ContaCorrente(Conta):
 
         """
         return self._limite
+    
+
+    def sacar(self, valor: float) -> None:
+        """
+        Realiza um saque na conta corrente, utilizando saldo + limite.
+
+        :valor: Valor a ser sacado (deve ser maior que zero).
+        :raises ValorInvalidoError: Se o valor for menor ou igual a zero.
+        :raises SaldoInsuficienteError: Se o saldo + limite for insuficiente.
+        """
+        if valor <= 0:
+            raise ValorInvalidoError(valor)
+
+        saldo_disponivel: float = self._saldo + self._limite
+        if valor > saldo_disponivel:
+            raise SaldoInsuficienteError(saldo_disponivel, valor)
+
+        self._saldo -= valor
+        self._registrar(f"Saque (conta corrente) de R$ {valor:.2f}")
+
+    def tipo_conta(self) -> str:
+        """
+        Retorna o nome do tipo de conta do cliente.
+
+        """
+        return "Conta Corrente"
