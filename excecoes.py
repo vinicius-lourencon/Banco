@@ -1,7 +1,14 @@
 class ErroBanco(Exception):
-    """Exceção base para o sistema do banco."""
-    pass
+    """
+    Exceção base para erros específicos do sistema bancário.
 
-class ContaNaoEncontradaError(ErroBanco):
-    def __init__(self, numero_conta: str):
-        super().__init__(f"Conta '{numero_conta}' não encontrada.")
+    Todas as outras exceções personalizadas vão herdar desta classe.
+    """
+
+    def __init__(self, mensagem: str) -> None:
+        """
+        Inicializa a exceção com uma mensagem descritiva.
+
+        mensagem: Texto explicando o erro ocorrido.
+        """
+        super().__init__(mensagem)
